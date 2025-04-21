@@ -11,7 +11,7 @@ Templates are implemented as uniquely-named, parallel directories to and in cont
 
 1. A basic reference web portal with simple database, frontend and backend implementations
 
-# Project implementations so far
+## Project implementations so far
 
 1. TBA
 
