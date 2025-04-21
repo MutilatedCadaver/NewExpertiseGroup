@@ -7,8 +7,11 @@ This repository is going to contain various web frontend and backend implementat
 
 ## Project templates
 
+Templates are implemented as uniquely-named, parallel directories to and in contrast to the inner 'newexpertisegroup' one where those template impl can be collectively run and tested in a combined way. There is also a separate test sub-sub-directory that might or might not be used. It is mostly because of how python manages packages and their internal scope of visibility.
+
 1. A basic reference web portal with simple database, frontend and backend implementations
 
 # Project implementations so far
 
 1. TBA
+
