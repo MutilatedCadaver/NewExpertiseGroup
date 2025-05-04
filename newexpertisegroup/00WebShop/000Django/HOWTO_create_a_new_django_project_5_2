@@ -1,0 +1,88 @@
+# Some prompt / terminal commands to get a Django project going, referencing the Django tutorial documentation
+# Django tutorial available at: https://docs.djangoproject.com/en/5.2/intro/tutorial01/
+
+# To create a clean web development environment with the specific python installation (use full python bin path to choose the correct python version)
+python -m venv /path/to/pythonvenvweb
+
+# To create the Django project, simply create a directory and bootstrap it with django-admin
+# The documentation reminds people to NOT USE RESERVED DJANGO OR PYTHON COMPONENT NAMES as django project names such as: django, test
+# Note that the 'djangotutorial' is there merely to contain the actual projects such as the later 'mysite' to separate it from the rest of the file system
+
+mkdir djangotutorial
+django-admin startproject mysite djangotutorial
+
+# The resulting new files should look like this: '''
+
+djangotutorial/
+    manage.py
+    mysite/
+        __init__.py
+        settings.py
+        urls.py
+        asgi.py
+        wsgi.py
+
+'''
+# Django treats 'projects' as the overall containers of apps and other such project components
+# Apps there is a separate command for creating an app for the project. It should be created in an existing project dir to minimize extra work
+
+# In comparison, 'django-admin startproject' creates at least settings.py and manage.py files.
+# 'django-admin startapp' creates models.py and app-specific template files. In short, the two commands create different template files to avoid overlap.
+
+# You can go to the djangotutorial dir and run it by typing:
+
+python manage.py runserver
+
+# manage.py takes over the traditional 'main.py' role in a Django project backend-wise
+# You can create a 'polls' app inside the project by typing:
+
+python manage.py startapp /path/to/djangotutorial/polls
+
+# The 'polls' app directories should look like this:
+
+'''
+
+polls/
+    __init__.py
+    admin.py
+    apps.py
+    migrations/
+        __init__.py
+    models.py
+    tests.py
+    urls.py
+    views.py
+
+'''
+
+# The tutorial suggests writing this into the views.py (of polls app):
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+
+# views.py is the PHP style hypertext processor part that defines the HTML page layouts and what user-based parameters gets injected into them
+# The tutorial instructs to write this into the app's urls.py :
+
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path("", views.index, name="index"),
+]
+
+# You can now configure the hosting 'mysite' project's SEPARATE urls.py to include the 'polls' app
+# The content and the main purpose of projects' and apps' urls.py files differ, so look at the containing dir to identify its purpose
+# You can add the following to the urls.py of the 'mysite' project :
+
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path("polls/", include("polls.urls")),
+    path("admin/", admin.site.urls),
+]
+
+---
+# You can find the numerous django-admin parameter options here: https://docs.djangoproject.com/en/5.2/ref/django-admin/#django-admin-startproject
